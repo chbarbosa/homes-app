@@ -51,8 +51,10 @@ export class DetailsComponent {
   })
 
   constructor() {
-    this.housingLocation =
     this.housingService.getHousingLocationById(Number(this.route.snapshot.paramMap.get('id')))
+      .then((data) => {
+        this.housingLocation = data
+      });
   }
 
   submitApplication() {
