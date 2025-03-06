@@ -15,6 +15,9 @@ import { HousingService } from '../housing.service';
         <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
+    <section class="errors" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </section>
     <section class="results">
       <app-housing-location *ngFor="let hl of filteredLocationList" [housingLocation]="hl"></app-housing-location>
     </section>
@@ -26,11 +29,16 @@ export class HomeComponent {
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
   filteredLocationList: HousingLocation[] = [];
+  errorMessage: string | null = null;
 
   constructor () {
     this.housingService.getHousingLocations().then((data) => {
+      console.log("getHousingLocations");
       this.housingLocationList = data;
       this.filteredLocationList = data;
+    }).catch((error) => {
+      console.log("error", error);
+      this.errorMessage = 'Failed to load housing locations. Please try again later.';
     });
   }
   filterResults(text: string) {

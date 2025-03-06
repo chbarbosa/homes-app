@@ -40,3 +40,13 @@
         grid-template-columns: 1fr;
     }    
   }
+
+.errors {
+  color: red;
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  border-radius: 5px;
+}
