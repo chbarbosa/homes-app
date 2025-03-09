@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from "../housing-location/housing-location.component";
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
+import { StatisticService } from '../statistic.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent {
   // from https://gist.githubusercontent.com/MarkTechson/efe8a9d4727ef33949b78812e66db082/raw/2eb2802c55e80bd5cb1c14fa5c322150bb3852dc/listing%2520data
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
+  statisticsService: StatisticService = inject(StatisticService);
   filteredLocationList: HousingLocation[] = [];
   errorMessage: string | null = null;
 
@@ -45,5 +47,6 @@ export class HomeComponent {
     if(!text) this.filteredLocationList = this.housingLocationList;
     this.filteredLocationList =
     this.housingLocationList.filter((hl) => hl?.city.toLowerCase().includes(text.toLowerCase()));
+    this.statisticsService.registerSearch(text);
   }
 }

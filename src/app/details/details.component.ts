@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housing-location';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { StatisticService } from '../statistic.service';
 
 @Component({
   selector: 'app-details',
@@ -43,6 +44,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService: HousingService = inject(HousingService);
+  statisticsService: StatisticService = inject(StatisticService);
   housingLocation: HousingLocation | undefined;
   applyForm = new FormGroup({
     firstName: new FormControl(''),
@@ -54,6 +56,7 @@ export class DetailsComponent {
     this.housingService.getHousingLocationById(Number(this.route.snapshot.paramMap.get('id')))
       .then((data) => {
         this.housingLocation = data
+        this.statisticsService.registerDetailView(data?.id);
       });
   }
 
