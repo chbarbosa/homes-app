@@ -50,3 +50,13 @@
   background-color: #ffe6e6;
   border-radius: 5px;
 }
+
+app-housing-location {
+  transition: transform 0.3s, border 0.3s;
+}
+
+app-housing-location:hover {
+  transform: scale(1.05);
+  border: 2px solid var(--primary-color);
+  border-radius: 31px;
+}
