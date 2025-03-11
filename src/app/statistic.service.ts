@@ -4,26 +4,65 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StatisticService {
-
-  private searchList: string[] = [];
-
-  private detailList: number[] = [];
+  private url_statistics = "http://localhost:3000/statistics";
 
   constructor() { }
 
-  registerSearch(mot: string) {
-    this.searchList.push(mot);
+  async registerSearch(searchText: string): Promise<void> {
+    try {
+      const response = await fetch(`${this.url_statistics}/searches`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ searchText, timestamp: new Date().toISOString() })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to register search');
+      }
+    } catch (error) {
+      console.error('Error registering search:', error);
+    }
   }
 
-  registerDetailView(idDetail: number) {
-    this.detailList.push(idDetail);
+  async registerDetailView(idDetail: number): Promise<void> {
+    try {
+      const response = await fetch(`${this.url_statistics}/details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ idDetail, timestamp: new Date().toISOString() })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to register detail view');
+      }
+    } catch (error) {
+      console.error('Error registering detail view:', error);
+    }
   }
 
-  countSearches(): number {
-    return this.searchList.length;
+  async countSearches(): Promise<number> {
+    try {
+      const response = await fetch(`${this.url_statistics}/searches`);
+      const data = await response.json();
+      console.log("countSearches", data);
+      return data.length;
+    } catch (error) {
+      console.error('Error counting searches:', error);
+      return 0;
+    }
   }
 
-  countDetailViews(): number {
-    return this.detailList.length;
+  async countDetailViews(): Promise<number> {
+    try {
+      const response = await fetch(`${this.url_statistics}/details`);
+      const data = await response.json();
+      console.log("countDetailViews", data);
+      return data.length;
+    } catch (error) {
+      console.error('Error counting detail views:', error);
+      return 0;
+    }
   }
 }
