@@ -11,7 +11,7 @@ import { StatisticService } from '../statistic.service';
   imports: [CommonModule, HousingLocationComponent],
   template: `
     <section>
-      <form>
+      <form (submit)="filterResults(filter.value); $event.preventDefault()">
         <input type="text" placeholder="Filter by city" #filter>
         <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>

@@ -131,6 +131,36 @@
       "id": "3c76",
       "searchText": "ch",
       "timestamp": "2025-03-12T22:40:28.054Z"
+    },
+    {
+      "id": "22b2",
+      "searchText": "",
+      "timestamp": "2025-03-12T22:54:20.655Z"
+    },
+    {
+      "id": "ccc3",
+      "searchText": "",
+      "timestamp": "2025-03-12T22:55:55.660Z"
+    },
+    {
+      "id": "2ab5",
+      "searchText": "",
+      "timestamp": "2025-03-12T22:59:41.222Z"
+    },
+    {
+      "id": "70d4",
+      "searchText": "",
+      "timestamp": "2025-03-12T22:59:42.199Z"
+    },
+    {
+      "id": "c21c",
+      "searchText": "",
+      "timestamp": "2025-03-12T22:59:42.459Z"
+    },
+    {
+      "id": "6303",
+      "searchText": "ch",
+      "timestamp": "2025-03-12T23:01:58.541Z"
     }
   ],
   "details": [
@@ -153,6 +183,11 @@
       "id": "1414",
       "idDetail": "1",
       "timestamp": "2025-03-12T22:43:24.683Z"
+    },
+    {
+      "id": "a6b0",
+      "idDetail": "0",
+      "timestamp": "2025-03-12T22:56:01.875Z"
     }
   ]
 }

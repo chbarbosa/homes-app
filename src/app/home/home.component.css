@@ -3,7 +3,7 @@
 .results {
     display: grid;
     column-gap: 14px;
-    row-gap: 14px;
+    row-gap: 25px;
     grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
     margin-top: 50px;
     justify-content: space-around;
@@ -48,7 +48,7 @@ app-housing-location {
 }
 
 app-housing-location:hover {
-  transform: scale(1.05);
+  transform: scale(1.025);
   border: 2px solid var(--primary-color);
   border-radius: 31px;
 }
