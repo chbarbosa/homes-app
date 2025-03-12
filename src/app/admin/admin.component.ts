@@ -21,11 +21,13 @@ export class AdminComponent {
   statisticsService: StatisticService = inject(StatisticService);
   searchesNumber: number | undefined;
   detailViewsNumber: number | undefined;
-  AdminComponent() {
+  constructor () {
     this.statisticsService.countSearches().then((data) => {
+      console.log("searchesNumber", data);
       this.searchesNumber = data;
     });
     this.statisticsService.countDetailViews().then((data) => {
+      console.log("details", data);
       this.detailViewsNumber = data;
     });
   }
