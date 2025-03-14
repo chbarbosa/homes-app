@@ -42,6 +42,23 @@ export class StatisticService {
     }
   }
 
+  async registerApplication(idDetail: number): Promise<void> {
+    try {
+      const response = await fetch(`${this.url_statistics}/applications`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ idDetail, timestamp: new Date().toISOString() })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to register detail view');
+      }
+    } catch (error) {
+      console.error('Error registering detail view:', error);
+    }
+  }
+
   async countSearches(): Promise<number> {
     try {
       const response = await fetch(`${this.url_statistics}/searches`);
@@ -60,6 +77,17 @@ export class StatisticService {
       return data.length;
     } catch (error) {
       console.error('Error counting detail views:', error);
+      return 0;
+    }
+  }
+
+  async countApplications(): Promise<number> {
+    try {
+      const response = await fetch(`${this.url_statistics}/applications`);
+      const data = await response.json();
+      return data.length;
+    } catch (error) {
+      console.error('Error counting applications:', error);
       return 0;
     }
   }
