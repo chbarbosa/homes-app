@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { StatisticService } from '../statistic.service';
+import { ApplicationsComponent } from "../applications/applications.component";
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [],
+  imports: [ApplicationsComponent],
   template: `
   <article class="admin">
     <h1 class="admin-heading">Admin Page</h1>
@@ -14,6 +15,7 @@ import { StatisticService } from '../statistic.service';
       <p>Number of detail views: {{detailViewsNumber}}</p>
       <p>Number of applications: {{applicationsNumber}}</p>
     </section>
+    <app-applications></app-applications>
   </article>
   `,
   styleUrl: './admin.component.css'

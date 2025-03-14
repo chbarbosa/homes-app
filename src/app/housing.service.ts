@@ -20,7 +20,16 @@ export class HousingService {
     return await data.json() ?? {};
   }
 
-  submitApplication(firstName: string, lastName: string, email: string) {
-    console.log(`Application submitted for ${firstName} ${lastName} at ${email}`);
+  submitApplication(firstName: string, lastName: string, email: string, housingLocationId: number): void {
+    if (!firstName || !lastName || !email || !housingLocationId || housingLocationId < 0) {
+      console.error('Missing required fields');
+      return;
+    }
+    console.log(`Application submitted for ${housingLocationId} from ${firstName} ${lastName} at ${email}`);
+  }
+
+  async listApplications(): Promise<[]> {
+    const response = await fetch(`${this.url_locations}/applications`);
+    return await response.json() ?? [];
   }
 }

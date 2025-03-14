@@ -42,23 +42,6 @@ export class StatisticService {
     }
   }
 
-  async registerApplication(idDetail: number): Promise<void> {
-    try {
-      const response = await fetch(`${this.url_statistics}/applications`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ idDetail, timestamp: new Date().toISOString() })
-      });
-      if (!response.ok) {
-        throw new Error('Failed to register detail view');
-      }
-    } catch (error) {
-      console.error('Error registering detail view:', error);
-    }
-  }
-
   async countSearches(): Promise<number> {
     try {
       const response = await fetch(`${this.url_statistics}/searches`);

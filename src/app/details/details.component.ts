@@ -65,6 +65,7 @@ export class DetailsComponent {
       this.applyForm.value.firstName ?? '',
       this.applyForm.value.lastName ?? '',
       this.applyForm.value.email ?? '',
+      this.housingLocation?.id ?? -1
     );
   }
 }
