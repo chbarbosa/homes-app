@@ -31,7 +31,6 @@ export class HomeComponent {
 
   constructor () {
     this.housingService.getHousingLocations().then((data) => {
-      console.log(data);
       this.housingLocationList = data;
       this.filteredLocationList = data;
     });

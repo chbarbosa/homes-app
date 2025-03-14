@@ -46,7 +46,6 @@ export class StatisticService {
     try {
       const response = await fetch(`${this.url_statistics}/searches`);
       const data = await response.json();
-      console.log("countSearches", data);
       return data.length;
     } catch (error) {
       console.error('Error counting searches:', error);
@@ -58,7 +57,6 @@ export class StatisticService {
     try {
       const response = await fetch(`${this.url_statistics}/details`);
       const data = await response.json();
-      console.log("countDetailViews", data);
       return data.length;
     } catch (error) {
       console.error('Error counting detail views:', error);

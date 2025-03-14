@@ -23,11 +23,9 @@ export class AdminComponent {
   detailViewsNumber: number | undefined;
   constructor () {
     this.statisticsService.countSearches().then((data) => {
-      console.log("searchesNumber", data);
       this.searchesNumber = data;
     });
     this.statisticsService.countDetailViews().then((data) => {
-      console.log("details", data);
       this.detailViewsNumber = data;
     });
   }
