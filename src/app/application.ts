@@ -3,5 +3,5 @@ export interface Application {
     firstName: string,
     lastName: string,
     email: string,
-    HousingLocationId: number,
+    housingLocationId: number,
 }

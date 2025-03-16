@@ -5,6 +5,7 @@ import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housing-location';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StatisticService } from '../statistic.service';
+import { Application } from '../application';
 
 @Component({
   selector: 'app-details',
@@ -61,11 +62,8 @@ export class DetailsComponent {
   }
 
   submitApplication() {
-    this.housingService.submitApplication(
-      this.applyForm.value.firstName ?? '',
-      this.applyForm.value.lastName ?? '',
-      this.applyForm.value.email ?? '',
-      this.housingLocation?.id ?? -1
-    );
+    var application = this.applyForm.value as Application;
+    application.housingLocationId = this.housingLocation?.id ?? -1;
+    this.housingService.submitApplication(application );
   }
 }
