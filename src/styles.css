@@ -17,13 +17,15 @@
   }
   
   button.primary {
-    padding: 10px;
+    padding: 8px 12px;
+    margin: 0 5px;
     border: solid 1px var(--primary-color);
     background: var(--primary-color);
     color: white;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
+    font-size: 16px; /* Default size */
   }
   
   button:hover {

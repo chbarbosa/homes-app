@@ -23,8 +23,8 @@ import { CommonModule } from '@angular/common';
           <td>{{ application.firstName }}</td>
           <td>{{ application.lastName }}</td>
           <td>
-            <button (click)="onEdit(application)">Edit</button>
-            <button (click)="onDelete(application)">Delete</button>
+            <button class="primary" (click)="onEdit(application)">Edit</button>
+            <button class="primary" (click)="onDelete(application)">Delete</button>
           </td>
         </tr>
       </tbody>
