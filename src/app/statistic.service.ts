@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StatisticService {
-  private url_statistics = "http://localhost:3000";
+  private readonly url_statistics = "http://localhost:3000";
 
   constructor() { }
 

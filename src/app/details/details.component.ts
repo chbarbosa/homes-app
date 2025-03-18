@@ -6,6 +6,7 @@ import { HousingLocation } from '../housing-location';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StatisticService } from '../statistic.service';
 import { Application } from '../application';
+import { ApplicationService } from '../application.service';
 
 @Component({
   selector: 'app-details',
@@ -44,9 +45,13 @@ import { Application } from '../application';
 })
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
+
   housingService: HousingService = inject(HousingService);
   statisticsService: StatisticService = inject(StatisticService);
+  applicationService: ApplicationService = inject(ApplicationService);
+
   housingLocation: HousingLocation | undefined;
+
   applyForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -64,6 +69,6 @@ export class DetailsComponent {
   submitApplication() {
     var application = this.applyForm.value as Application;
     application.housingLocationId = this.housingLocation?.id ?? -1;
-    this.housingService.submitApplication(application );
+    this.applicationService.submitApplication(application );
   }
 }

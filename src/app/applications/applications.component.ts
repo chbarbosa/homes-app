@@ -1,7 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Application } from '../application';
-import { HousingService } from '../housing.service';
-import { CommonModule } from '@angular/common';
+import { ApplicationService } from '../application.service';
 
 @Component({
   selector: 'app-applications',
@@ -34,10 +34,10 @@ import { CommonModule } from '@angular/common';
 })
 export class ApplicationsComponent {
   applications : Application[] = [];
-  housingService: HousingService = inject(HousingService);
+  applicaitonService: ApplicationService = inject(ApplicationService);
 
   ngOnInit() {
-    this.housingService.listApplications().then(data => { 
+    this.applicaitonService.listApplications().then(data => { 
       console.log(data);
       this.applications = data;
     });
