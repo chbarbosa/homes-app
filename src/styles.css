@@ -35,3 +35,9 @@
   button:active {
     transform: scale(0.98);
   }
+  
+  button.primary:disabled {
+    background-color: #cccccc; /* Light gray background */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+    opacity: 0.6; /* Reduce opacity */
+  }

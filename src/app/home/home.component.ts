@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { HousingLocationComponent } from "../housing-location/housing-location.component";
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
@@ -8,12 +9,13 @@ import { StatisticService } from '../statistic.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent],
+  imports: [CommonModule, FormsModule, HousingLocationComponent], // Add FormsModule to imports
   template: `
     <section>
-      <form (submit)="filterResults(filter.value); $event.preventDefault()">
-        <input type="text" placeholder="Filter by city" #filter>
-        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+      <form (submit)="filterResults(); $event.preventDefault()">
+        <input type="text" placeholder="Filter by city" [(ngModel)]="filterText" name="filterText" >
+        <button class="primary" type="button" (click)="filterResults()" [disabled]="filterText.length < 3" >Search</button>
+        <button class="primary" type="button" (click)="cleanResults()">Clean</button>
       </form>
     </section>
     <section class="errors" *ngIf="errorMessage">
@@ -32,6 +34,7 @@ export class HomeComponent {
   statisticService: StatisticService = inject(StatisticService);
   filteredLocationList: HousingLocation[] = [];
   errorMessage: string | null = null;
+  filterText: string = '';
 
   constructor () {
     this.housingService.getHousingLocations().then((data) => {
@@ -42,10 +45,18 @@ export class HomeComponent {
       this.errorMessage = 'Failed to load housing locations. Please try again later.';
     });
   }
-  filterResults(text: string) {
-    if(!text) this.filteredLocationList = this.housingLocationList;
-    this.filteredLocationList =
-    this.housingLocationList.filter((hl) => hl?.city.toLowerCase().includes(text.toLowerCase()));
-    this.statisticService.registerSearch(text);
+  filterResults() {
+    this.errorMessage = null;
+    if(this.filterText.length > 2) {
+      this.filteredLocationList =
+      this.housingLocationList.filter((hl) => hl?.city.toLowerCase().includes(this.filterText.trim().toLowerCase()));
+      this.statisticService.registerSearch(this.filterText);
+      return;
+    }
+    this.filteredLocationList = this.housingLocationList;
+  }
+  cleanResults() {
+    this.errorMessage = null;
+    this.filteredLocationList = this.housingLocationList;
   }
 }
