@@ -184,6 +184,11 @@
       "id": "6303",
       "searchText": "ch",
       "timestamp": "2025-03-12T23:01:58.541Z"
+    },
+    {
+      "id": "9a58",
+      "searchText": "",
+      "timestamp": "2025-03-19T20:53:25.726Z"
     }
   ],
   "details": [
@@ -241,6 +246,11 @@
       "id": "46f4",
       "idDetail": "4",
       "timestamp": "2025-03-16T23:56:23.068Z"
+    },
+    {
+      "id": "f114",
+      "idDetail": "0",
+      "timestamp": "2025-03-19T20:53:17.688Z"
     }
   ]
 }

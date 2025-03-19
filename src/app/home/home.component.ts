@@ -16,6 +16,9 @@ import { StatisticService } from '../statistic.service';
         <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
+    <section class="errors" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </section>
     <section class="results">
       <app-housing-location *ngFor="let hl of filteredLocationList" [housingLocation]="hl"></app-housing-location>
     </section>
@@ -24,15 +27,19 @@ import { StatisticService } from '../statistic.service';
 })
 export class HomeComponent {
   // from https://gist.githubusercontent.com/MarkTechson/efe8a9d4727ef33949b78812e66db082/raw/2eb2802c55e80bd5cb1c14fa5c322150bb3852dc/listing%2520data
-  housingLocationList: HousingLocation[] = [];
+  private housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
   statisticService: StatisticService = inject(StatisticService);
   filteredLocationList: HousingLocation[] = [];
+  errorMessage: string | null = null;
 
   constructor () {
     this.housingService.getHousingLocations().then((data) => {
       this.housingLocationList = data;
       this.filteredLocationList = data;
+    }).catch((error) => {
+      console.log("error", error);
+      this.errorMessage = 'Failed to load housing locations. Please try again later.';
     });
   }
   filterResults(text: string) {
