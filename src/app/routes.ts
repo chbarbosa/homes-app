@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { DetailsComponent } from "./details/details.component";
 import { AdminComponent } from "./admin/admin.component";
+import { ApplicationsconfirmationComponent } from "./applicationsconfirmation/applicationsconfirmation.component";
 
 const routeConfig: Routes = [
     {
@@ -19,6 +20,11 @@ const routeConfig: Routes = [
         component: AdminComponent,
         title: "Admin Page",
     },
+    {
+        path: 'confirmation',
+        component: ApplicationsconfirmationComponent,
+        title: "Applications Confirmation Page",
+    }
 ];
 
 export default routeConfig;

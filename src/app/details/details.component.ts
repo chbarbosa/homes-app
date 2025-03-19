@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housing-location';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -45,6 +45,7 @@ import { ApplicationService } from '../application.service';
 })
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
+  router: Router = inject(Router);
 
   housingService: HousingService = inject(HousingService);
   statisticsService: StatisticService = inject(StatisticService);
@@ -70,5 +71,6 @@ export class DetailsComponent {
     var application = this.applyForm.value as Application;
     application.housingLocationId = this.housingLocation?.id ?? -1;
     this.applicationService.submitApplication(application );
+    this.router.navigate(['/confirmation'], { state: { application } });
   }
 }
