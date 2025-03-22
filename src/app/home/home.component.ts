@@ -21,6 +21,9 @@ import { StatisticService } from '../statistic.service';
     <section class="errors" *ngIf="errorMessage">
       {{ errorMessage }}
     </section>
+    <section class="info" *ngIf="showInfo()">
+      <p>no options found</p>
+    </section>
     <section class="results">
       <app-housing-location *ngFor="let hl of filteredLocationList" [housingLocation]="hl"></app-housing-location>
     </section>
@@ -44,6 +47,9 @@ export class HomeComponent {
       console.log("error", error);
       this.errorMessage = 'Failed to load housing locations. Please try again later.';
     });
+  }
+  showInfo(): boolean {
+    return this.filteredLocationList.length === 0 && !this.errorMessage;
   }
   filterResults() {
     this.errorMessage = null;

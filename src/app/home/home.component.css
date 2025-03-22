@@ -41,6 +41,7 @@
   border: 1px solid red;
   background-color: #ffe6e6;
   border-radius: 5px;
+  width: 50%;
 }
 
 app-housing-location {
@@ -51,4 +52,17 @@ app-housing-location:hover {
   transform: scale(1.025);
   border: 2px solid var(--primary-color);
   border-radius: 31px;
+}
+
+.info {
+  color: #363535; /* Red color for visibility */
+  font-size: 1.2em; /* Slightly larger font size */
+  margin-top: 20px; /* Space above the info section */
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: lightgrey;
+  border-radius: 5px;
+  width: 50%;
 }
