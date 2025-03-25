@@ -23,8 +23,8 @@ import { ApplicationService } from '../application.service';
           <td>{{ application.firstName }}</td>
           <td>{{ application.lastName }}</td>
           <td>
-            <button class="primary" (click)="onEdit(application)">Edit</button>
-            <button class="primary" (click)="onDelete(application)">Delete</button>
+            <button class="primary" (click)="onConfirm(application)">confirm</button>
+            <button class="primary" (click)="onCancel(application)">cancel</button>
           </td>
         </tr>
       </tbody>
@@ -32,6 +32,7 @@ import { ApplicationService } from '../application.service';
   `,
   styleUrl: './applications.component.css'
 })
+//TODO: add status for confirmation, add treatments for confirm and cancel and don't show the buttons when there is a decision.
 export class ApplicationsComponent {
   applications : Application[] = [];
   applicaitonService: ApplicationService = inject(ApplicationService);
@@ -43,11 +44,11 @@ export class ApplicationsComponent {
     });
   }
 
-  onEdit(application: any) {
+  onConfirm(application: any) {
     // Implement edit functionality
   }
 
-  onDelete(application: any) {
+  onCancel(application: any) {
     // Implement delete functionality
   }
 }
