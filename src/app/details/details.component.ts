@@ -70,7 +70,11 @@ export class DetailsComponent {
   submitApplication() {
     var application = this.applyForm.value as Application;
     application.housingLocationId = this.housingLocation?.id ?? -1;
-    this.applicationService.submitApplication(application );
-    this.router.navigate(['/confirmation'], { state: { application } });
+    try {
+      this.applicationService.submitApplication(application );
+      this.router.navigate(['/confirmation'], { state: { application } });
+    } catch (error) {
+      
+    }
   }
 }

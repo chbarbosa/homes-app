@@ -5,6 +5,7 @@ import { HousingLocationComponent } from "../housing-location/housing-location.c
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
 import { StatisticService } from '../statistic.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-home',
@@ -18,12 +19,6 @@ import { StatisticService } from '../statistic.service';
         <button class="primary" type="button" (click)="cleanResults()">Clean</button>
       </form>
     </section>
-    <section class="errors" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </section>
-    <section class="info" *ngIf="showInfo()">
-      <p>no options found</p>
-    </section>
     <section class="results">
       <app-housing-location *ngFor="let hl of filteredLocationList" [housingLocation]="hl"></app-housing-location>
     </section>
@@ -35,8 +30,8 @@ export class HomeComponent {
   private housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
   statisticService: StatisticService = inject(StatisticService);
+  messageService: MessageService = inject(MessageService);
   filteredLocationList: HousingLocation[] = [];
-  errorMessage: string | null = null;
   filterText: string = '';
 
   constructor () {
@@ -45,14 +40,11 @@ export class HomeComponent {
       this.filteredLocationList = data;
     }).catch((error) => {
       console.log("error", error);
-      this.errorMessage = 'Failed to load housing locations. Please try again later.';
+      this.messageService.setMessage('Failed to load housing locations. Please try again later.');
     });
   }
-  showInfo(): boolean {
-    return this.filteredLocationList.length === 0 && !this.errorMessage;
-  }
   filterResults() {
-    this.errorMessage = null;
+    this.messageService.cleanMessage()
     if(this.filterText.length > 2) {
       this.filteredLocationList =
       this.housingLocationList.filter((hl) => hl?.city.toLowerCase().includes(this.filterText.trim().toLowerCase()));
@@ -62,7 +54,8 @@ export class HomeComponent {
     this.filteredLocationList = this.housingLocationList;
   }
   cleanResults() {
-    this.errorMessage = null;
+    this.messageService.cleanMessage()
     this.filteredLocationList = this.housingLocationList;
+    this.filterText = '';
   }
 }

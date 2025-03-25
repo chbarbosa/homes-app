@@ -24,18 +24,19 @@ export class ApplicationService {
         body: JSON.stringify(application)
       });
       if (!response.ok) {
+        //TODO show warning to user
         throw new Error('Failed to register a new application');
       }
     } catch (error) {
-      console.error('Error registering application:', error);
+      //TODO show warning to user
+      throw new Error('Failed to submit application');
     }
   }
 
   submitApplication(application: Application): void {
     if (!this.validateApplication(application)) {
-      // TODO: Add better error handling, show a message to the user
-      console.error('Missing required fields');
-      return;
+      //TODO show warning to user
+      throw new Error('Missing required fields');
     }
     this.registerApplication(application).then(() => {
       console.log(`Application submitted for ${application.housingLocationId} from ${application.firstName} ${application.lastName} at ${application.email}`);
