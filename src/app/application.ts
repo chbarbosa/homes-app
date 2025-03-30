@@ -4,4 +4,5 @@ export interface Application {
     lastName: string,
     email: string,
     housingLocationId: number,
+    status: string | null
 }

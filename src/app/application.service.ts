@@ -14,6 +14,23 @@ export class ApplicationService {
     return await response.json() ?? [];
   }
 
+  async updateApplication(application: Application): Promise<void> {
+    try {
+      const response = await fetch(`${this.url_applications}/${application.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(application)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update a new application');
+      }
+    } catch (error) {
+      throw new Error('Failed to update application');
+    }
+  }
+
   private async registerApplication(application: Application): Promise<void> {
     try {
       const response = await fetch(this.url_applications, {
@@ -24,18 +41,15 @@ export class ApplicationService {
         body: JSON.stringify(application)
       });
       if (!response.ok) {
-        //TODO show warning to user
         throw new Error('Failed to register a new application');
       }
     } catch (error) {
-      //TODO show warning to user
       throw new Error('Failed to submit application');
     }
   }
 
   submitApplication(application: Application): void {
     if (!this.validateApplication(application)) {
-      //TODO show warning to user
       throw new Error('Missing required fields');
     }
     this.registerApplication(application).then(() => {

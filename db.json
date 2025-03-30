@@ -5,14 +5,16 @@
       "firstName": "c",
       "lastName": "b",
       "email": "cb@gmail.com",
-      "housingLocationId": "1"
+      "housingLocationId": "1",
+      "status": "confirmed"
     },
     {
       "id": "bd5b",
       "firstName": "cam",
       "lastName": "bar",
       "email": "camb@gmail.com",
-      "housingLocationId": "1"
+      "housingLocationId": "1",
+      "status": "canceled"
     },
     {
       "id": "6a81",

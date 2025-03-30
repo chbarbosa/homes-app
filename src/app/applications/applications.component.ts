@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Application } from '../application';
 import { ApplicationService } from '../application.service';
+import { MessageService } from '../message.service';
+import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-applications',
@@ -23,8 +25,11 @@ import { ApplicationService } from '../application.service';
           <td>{{ application.firstName }}</td>
           <td>{{ application.lastName }}</td>
           <td>
-            <button class="primary" (click)="onConfirm(application)">confirm</button>
-            <button class="primary" (click)="onCancel(application)">cancel</button>
+            <div *ngIf="!application.status">
+              <button class="primary" (click)="onConfirm(application)">confirm</button>
+              <button class="primary" (click)="onCancel(application)">cancel</button>
+            </div>
+            <span *ngIf="application.status">{{application.status}}</span>
           </td>
         </tr>
       </tbody>
@@ -36,19 +41,38 @@ import { ApplicationService } from '../application.service';
 export class ApplicationsComponent {
   applications : Application[] = [];
   applicaitonService: ApplicationService = inject(ApplicationService);
+  messageService: MessageService = inject(MessageService);
 
   ngOnInit() {
     this.applicaitonService.listApplications().then(data => { 
-      console.log(data);
       this.applications = data;
     });
   }
 
   onConfirm(application: any) {
-    // Implement edit functionality
+    application.status = 'confirmed';
+    this.applicaitonService.updateApplication(application).then(() => {
+      console.log('Application confirmed');
+    }
+    ).catch((error: any) => {
+      this.handleError(error);
+    }
+    );
   }
 
   onCancel(application: any) {
-    // Implement delete functionality
+    application.status = 'canceled';
+    this.applicaitonService.updateApplication(application).then(() => {
+      console.log('Application canceled');
+    }
+    ).catch((error: any) => {
+      this.handleError(error);
+    }
+    );
+  }
+
+  private handleError(error: any) {
+    console.error(error);
+    this.messageService.setMessage(error.message);
   }
 }
