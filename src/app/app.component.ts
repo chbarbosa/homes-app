@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from "./home/home.component";
 import { RouterModule } from '@angular/router';
 import { MessageService } from './message.service';
+import { Message } from './message';
 
 @Component({
   standalone: true,
@@ -10,8 +11,8 @@ import { MessageService } from './message.service';
   template: `
     <main>
       <header class="brand-name"><a routerLink="/"><img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true"></a></header>
-      <section class="errors" *ngIf="errorMessage">
-        {{ errorMessage }}
+      <section [class]="message.type" *ngIf="message">
+        {{ message.text }}
       </section>
       <section class="content">
         <router-outlet></router-outlet>
@@ -23,13 +24,11 @@ import { MessageService } from './message.service';
 })
 export class AppComponent {
   title = 'homes';
-  errorMessage: string | null = null;
+  message: Message | null = null;
 
   messageService: MessageService = inject(MessageService);
 
   ngOnInit() {
-    this.messageService.message.subscribe((message) => {
-      this.errorMessage = message;
-  });
+    this.messageService.message.subscribe(m => this.message = m);
 }
 }

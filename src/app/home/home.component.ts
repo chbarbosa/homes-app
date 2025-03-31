@@ -40,7 +40,7 @@ export class HomeComponent {
       this.filteredLocationList = data;
     }).catch((error) => {
       console.log("error", error);
-      this.messageService.setMessage('Failed to load housing locations. Please try again later.');
+      this.messageService.setErrorMessage('Failed to load housing locations. Please try again later.');
     });
   }
   filterResults() {
@@ -48,6 +48,9 @@ export class HomeComponent {
     if(this.filterText.length > 2) {
       this.filteredLocationList =
       this.housingLocationList.filter((hl) => hl?.city.toLowerCase().includes(this.filterText.trim().toLowerCase()));
+      if(this.filteredLocationList.length === 0) {
+        this.messageService.setInfoMessage('No results found');
+      }
       this.statisticService.registerSearch(this.filterText);
       return;
     }

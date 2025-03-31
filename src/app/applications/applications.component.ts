@@ -73,6 +73,6 @@ export class ApplicationsComponent {
 
   private handleError(error: any) {
     console.error(error);
-    this.messageService.setMessage(error.message);
+    this.messageService.setErrorMessage(error.message);
   }
 }
