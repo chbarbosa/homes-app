@@ -68,5 +68,11 @@
       width: 100%;
       height: 400px;
     }
+    .listing-heading {
+      font-size: 36pt;
+    }
+    .listing-features > .section-heading {
+      font-size: 18pt;
+    }
   }
   
