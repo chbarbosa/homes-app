@@ -74,7 +74,7 @@ export class DetailsComponent {
       this.applicationService.submitApplication(application );
       this.router.navigate(['/confirmation'], { state: { application } });
     } catch (error) {
-      
+      this.router.navigate(['/error']);
     }
   }
 }

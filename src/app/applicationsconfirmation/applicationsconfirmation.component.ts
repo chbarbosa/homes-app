@@ -30,7 +30,7 @@ export class ApplicationsconfirmationComponent {
       this.houseName = state.application.houseName || 'Not specified';
     } else {
       // Redirect to home if no application data
-      this.router.navigate(['/']);
+      this.router.navigate(['/error']);
     }
   }
 }
