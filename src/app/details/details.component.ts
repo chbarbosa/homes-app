@@ -7,6 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StatisticService } from '../statistic.service';
 import { Application } from '../application';
 import { ApplicationService } from '../application.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-details',
@@ -46,6 +47,7 @@ import { ApplicationService } from '../application.service';
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
+  messageService: MessageService = inject(MessageService);
 
   housingService: HousingService = inject(HousingService);
   statisticsService: StatisticService = inject(StatisticService);
@@ -70,11 +72,18 @@ export class DetailsComponent {
   submitApplication() {
     var application = this.applyForm.value as Application;
     application.housingLocationId = this.housingLocation?.id ?? -1;
+    if(!this.validate(application)) {
+      this.messageService.setErrorMessage('Some required fields are missing');
+      return;
+    }
     try {
       this.applicationService.submitApplication(application );
       this.router.navigate(['/confirmation'], { state: { application } });
     } catch (error) {
       this.router.navigate(['/error']);
     }
+  }
+  private validate(application: Application): boolean {
+   return !!(application.firstName && application.lastName && application.email);
   }
 }
